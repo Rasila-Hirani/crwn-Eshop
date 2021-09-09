@@ -16,6 +16,7 @@ const config ={
   const app = initializeApp(config);
   const db = getFirestore(app);
   export const auth = getAuth(app);
+  
 
   export const createUserProfileDocument = async (userAuth, additionalData) =>{
     if(!userAuth) return;
