@@ -7,3 +7,13 @@ export const addCartItem =(item)=>({
     type:CartActionTypes.ADD_ITEM,
     payload:item
 })
+
+export const removeCartItem =(id)=>({
+    type:CartActionTypes.REMOVE_ITEM,
+    payload:id
+})
+
+export const descreaseQuantity =(item)=>({
+    type:CartActionTypes.DECREASE_QUANTITY,
+    payload:item
+})
