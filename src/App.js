@@ -12,13 +12,15 @@ import SignInSignUpPage from './component/pages/sigin-in-and-sign-up/sigin-in-an
 import CheckoutPage from './component/pages/checkout/checkout';
 import {setCurrentUser} from './redux/user/userAction';
 import {selectCurrentUser} from './redux/user/user.selector';
+
+
 class App extends React.Component {
 
-  unsubscriveFromAuth=null;
+  unsubscribeFromAuth=null;
 
   componentDidMount(){
     const {setCurrentUser} = this.props;
-  this.unsubscriveFromAuth = auth.onAuthStateChanged(async user =>{
+  this.unsubscribeFromAuth = auth.onAuthStateChanged(async user =>{
     if(user){
       const userSnap =await createUserProfileDocument(user);
       setCurrentUser({
@@ -31,9 +33,10 @@ class App extends React.Component {
       setCurrentUser(user)
     }
     })
+   
   }
   componentWillUnmount(){
-    this.unsubscriveFromAuth();
+    this.unsubscribeFromAuth();
   }
   render(){
     
