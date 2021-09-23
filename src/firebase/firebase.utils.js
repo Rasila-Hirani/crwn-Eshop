@@ -21,10 +21,10 @@ const config ={
 
   export const createUserProfileDocument = async (userAuth, additionalData) =>{
     if(!userAuth) return;
-    
+   
     const userRef = await doc(db,'users',`${userAuth.uid}`);
     const userSnap = await getDoc(userRef);
-
+    
     if(!userSnap.exists()){
         const {displayName, email} = userAuth;
          const createdAt = new Date()
@@ -43,23 +43,16 @@ const config ={
     return userSnap;
   }
 
- export const signUpwithEmailAndPassword =async(email,password,displayName)=>{
-    const {user} =await createUserWithEmailAndPassword(auth,email,password,displayName)
-   return user;
+ export const signUpwithEmailAndPassword =(email,password)=>{
+ 
+    return createUserWithEmailAndPassword(auth,email,password)
+  
+   
  }
 export const signInwithEmailPassword = (email,password)=>{
-    signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-  //  const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
  
-    console.log(errorCode)
-    
-  });
+  return  signInWithEmailAndPassword(auth, email, password)
+
 }
 
 export const addShopDataTOfirestore =async (key,objectsTOadd)=>{
@@ -94,28 +87,19 @@ return transformCollection.reduce((accumulator,collection) =>{
 
 
 
-
-//  const transformCollection = collectionSnapshot.docs.map((doc) =>{
-//     const {title,items} = doc.data()
-//     return {
-//       routeName:encodeURI(title.toLowerCase()),
-//       id:doc.id,
-//       title,
-//       items
-//     }
-//   })
-// return transformCollection.reduce((accumulator,collection) =>{
-//   accumulator[collection.title.toLowerCase()] =collection;
-//   return accumulator;
-// },{})
-
-
-
 }
 
-  const provider = new GoogleAuthProvider();
-  provider.setCustomParameters({ prompt: 'select_account' });
-  export const signInWithGoogle = () => signInWithPopup(auth ,provider);
+export const getCurrentUser =() =>{
+  return new Promise((resolve, reject) =>{
+    const unsubscribe = auth.onAuthStateChanged(userAuth =>{
+      unsubscribe();
+      resolve(userAuth)
+    },reject)
+  })
+}
+  const googelProvider = new GoogleAuthProvider();
+  googelProvider.setCustomParameters({ prompt: 'select_account' });
+  export const signInWithGoogle = () =>signInWithPopup(auth ,googelProvider) ;
 
 
 export default app;

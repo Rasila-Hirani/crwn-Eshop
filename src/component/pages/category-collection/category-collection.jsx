@@ -5,6 +5,8 @@ import CollectionItem from '../../collection-item/collection-item';
 import { selectCategoryCollection } from '../../../redux/shop/shopDataSelector';
 
 const CategoryCollectionPage =({collection})=>{
+   
+   
     const {title,items} =collection;
     return(
     <div className="collection-page">
