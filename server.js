@@ -5,6 +5,7 @@ const path = require('path');
 
 
 
+
 if(process.env.NODE_ENV != 'production') require('dotenv').config();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(cors());
 
+console.log('process.env.NODE_ENV',process.env.NODE_ENV)
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname,'client/build')))
     app.get('*',function(req,res){
@@ -30,6 +32,7 @@ app.listen(port,error =>{
 })
 
 app.post('/payment',(req,res) =>{
+    console.log('req.body',req.body)
     const body = {
         source : req.body.token.id,
         amount:req.body.amount,

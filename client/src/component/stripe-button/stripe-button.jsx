@@ -12,7 +12,7 @@ const StripeCheckoutButton =({price})=>{
            method:'POST',
            data:{
                amount:priceForStripe,
-                token
+                token:token
            }
        }).then(response =>{
            alert('Payment successfull !!');
