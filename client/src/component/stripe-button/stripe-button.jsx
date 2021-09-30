@@ -13,7 +13,14 @@ const StripeCheckoutButton =({price})=>{
            data:{
                amount:priceForStripe,
                 token
-           }
+           },
+           
+            headers : { 
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+             }
+      
+          
        }).then(response =>{
            alert('Payment successfull !!');
        }).catch(error =>{
