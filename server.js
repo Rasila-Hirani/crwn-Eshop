@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extends:true}));
 app.use(cors());
 
-console.log('process.env.NODE_ENV',process.env.NODE_ENV)
+
 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname,'client/build')))
@@ -26,7 +26,6 @@ app.listen(port,error =>{
 })
 
 app.post('/payment',(req,res) =>{
-    console.log('req.body',req.body)
     const body = {
         source : req.body.token.id,
         amount:req.body.amount,
@@ -35,6 +34,7 @@ app.post('/payment',(req,res) =>{
     
     stripe.charges.create(body,(stripeErr,stripeRes)=>{
         if(stripeErr){
+            console.log(stripeErr)
             res.status(500).send({error:stripeErr})
         }else{
             res.status(200).send({success:stripeRes})
