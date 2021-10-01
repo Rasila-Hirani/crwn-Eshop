@@ -1,8 +1,9 @@
 const express = require('express');
-const app = express();
-const cors = require('cors');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const path = require('path');
+
+const app = express();
 
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
@@ -25,18 +26,25 @@ app.listen(port,error =>{
     console.log('Server running on port '+ port)
 })
 
-app.post('/payment',(req,res) =>{
-    const body = {
-        source : req.body.token.id,
-        amount:req.body.amount,
-        currency:'usd'
-    };
+app.post('/payment',async(req,res) =>{
     
-    stripe.charges.create(body,(stripeErr,stripeRes)=>{
-        if(stripeErr){
-            res.status(500).send({error:stripeErr})
-        }else{
-            res.status(200).send({success:stripeRes})
-        }
-    })
+    try{
+        const body = {
+            source : req.body.token.id,
+            amount:req.body.amount,
+            currency:'usd'
+        };
+
+        stripe.charges.create(body,(stripeErr,stripeRes)=>{
+            if(stripeErr){
+                res.status(500).send({error:stripeErr})
+            }else{
+                res.status(200).send({success:stripeRes})
+            }
+        })
+    }catch(error){
+        console.log(error)
+        res.status(500).json({message:'Internal server error'})
+    }
+  
 })

@@ -10,6 +10,10 @@ const StripeCheckoutButton =({price})=>{
        axios({
            url:'payment',
            method:'POST',
+           headers:{
+               'Content-Type':'application/json',
+               'Accept':'application/json'
+           },
            data:{
                amount:priceForStripe,
                 token
