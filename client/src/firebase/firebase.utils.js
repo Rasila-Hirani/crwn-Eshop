@@ -4,7 +4,7 @@ import { getFirestore, doc,getDocs, getDoc,setDoc ,collection, writeBatch} from 
 import {getAuth ,GoogleAuthProvider,signInWithPopup,createUserWithEmailAndPassword,signInWithEmailAndPassword} from 'firebase/auth';
 
 
-
+console.log(process.env)
 
 const config ={
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
