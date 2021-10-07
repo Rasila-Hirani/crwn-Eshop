@@ -4,7 +4,7 @@ import FormInput from '../form-input/form-input';
 import CustomButton from '../custom-button/custom-button';
 import {signUpStart} from '../../redux/user/userAction';
 
-import './sign-up.scss';
+import { SignUpContainer, SignUpTitle } from './sign-up.styles';
 
 
 const SignUp =({signUpStart})=>{
@@ -30,42 +30,45 @@ const SignUp =({signUpStart})=>{
     }
   
         return(
-            <div className="sign-up">
-                <h2 className="title">I do not have account.</h2>
-                <span>Sign up with your email and password</span>
-                <form className="sign-up-form" onSubmit={handleSubmit}>
-                    <FormInput 
-                        type="text"
-                        name="displayName"
-                        label="Display Name"
-                        value={displayName}
-                        handleChange={handleChange}
-                        required
-                    />
-                <FormInput 
-                        name="email" 
-                        type="email" 
-                        label="Email"
-                        value={email} 
-                        handleChange={handleChange}
-                        required />
-                 <FormInput 
-                        name="password" 
-                        type="password" 
-                        label="Password"
-                        value={password} 
-                        handleChange={handleChange}
-                        required />
-                 <FormInput 
-                        name="confirmPassword" 
-                        type="password" 
-                        label="Confirm Password"
-                        value={confirmPassword} 
-                        handleChange={handleChange}
-                        required />
-                <CustomButton type="submit">SIGN UP</CustomButton>
-                </form>
-            </div>
+            <SignUpContainer>
+            <SignUpTitle>I do not have a account</SignUpTitle>
+            <span>Sign up with your email and password</span>
+            <form className='sign-up-form' onSubmit={handleSubmit}>
+              <FormInput
+                type='text'
+                name='displayName'
+                value={displayName}
+                onChange={handleChange}
+                label='Display Name'
+                required
+              />
+              <FormInput
+                type='email'
+                name='email'
+                value={email}
+                onChange={handleChange}
+                label='Email'
+                required
+              />
+              <FormInput
+                type='password'
+                name='password'
+                value={password}
+                onChange={handleChange}
+                label='Password'
+                required
+              />
+              <FormInput
+                type='password'
+                name='confirmPassword'
+                value={confirmPassword}
+                onChange={handleChange}
+                label='Confirm Password'
+                required
+              />
+              <CustomButton type='submit'>SIGN UP</CustomButton>
+            </form>
+          </SignUpContainer>
         );
     
 }

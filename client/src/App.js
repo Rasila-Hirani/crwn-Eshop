@@ -2,8 +2,8 @@ import React,{useEffect} from 'react';
 import {Switch, Route,Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import {GlobalStyle} from './global.styles';
 
-import './App.css';
 import HomePage from './component/pages/homepage/homepage';
 import Header from './component/header/header';
 import ShopPage from './component/pages/shop/shop';
@@ -22,7 +22,7 @@ const App =({checkUserSession,currentUser})=> {
 
     return (
       <div>
-        
+        <GlobalStyle/>
         <Header/>
         <Switch>
           <Route path='/' component={HomePage} exact/>
