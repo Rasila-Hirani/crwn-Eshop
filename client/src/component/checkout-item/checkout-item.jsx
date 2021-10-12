@@ -11,7 +11,7 @@ import {
   } from './checkout-item.styles';
 
 const CheckoutItem =({cartItem,clearItem,addItem,descreaseQuantity})=>{
-    const {imageUrl,name,price,quantity} = cartItem
+    const {id,imageUrl,name,price,quantity} = cartItem
     
     return(
  
