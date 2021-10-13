@@ -11,7 +11,7 @@ import {
   } from './checkout-item.styles';
 
 const CheckoutItem =({cartItem,clearItem,addItem,descreaseQuantity})=>{
-    const {id,imageUrl,name,price,quantity} = cartItem
+    const {imageUrl,name,price,quantity} = cartItem
     
     return(
  
@@ -33,7 +33,7 @@ const CheckoutItem =({cartItem,clearItem,addItem,descreaseQuantity})=>{
   </CheckoutItemContainer>
 )};
 const mapDispatchToProps =(dispatch)=>({
-    clearItem:id=>dispatch(removeCartItem(id)),
+    clearItem:id=>dispatch(removeCartItem()),
     addItem :item =>dispatch(addCartItem(item)),
     descreaseQuantity: item => dispatch(descreaseQuantity(item))
 })

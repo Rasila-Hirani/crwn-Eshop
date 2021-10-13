@@ -6,8 +6,8 @@ import {fetchCollectionsStart} from '../../../redux/shop/shopAction';
 import Spinner from '../../spinner/spinner';
 import {ShopPageContainer} from './shop.styles';
 
-const CollectionOverviewContainer = lazy(()=>import('../../collection-overview/collection-overview'));
-const CategoryCollectionPageContainer = lazy(() => import('../category-collection/category-collection'));
+const CollectionsOverviewContainer = lazy(()=>import('../../collection-overview/collection-overview-container'));
+const CategoryCollectionPageContainer = lazy(() => import('../category-collection/category-collection-container'));
 
 
 
@@ -22,7 +22,7 @@ const ShopPage =({match,fetchCollectionsStart})=>{
                 <Route 
                     exact 
                     path={`${match.path}`}
-                    component={CollectionOverviewContainer}/>
+                    component={CollectionsOverviewContainer}/>
                 <Route 
                     path={`${match.path}/:collectionId`}
                     component={CategoryCollectionPageContainer}

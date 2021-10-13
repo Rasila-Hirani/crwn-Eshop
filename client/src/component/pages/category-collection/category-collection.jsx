@@ -9,6 +9,7 @@ import CollectionItem from '../../collection-item/collection-item';
 import { selectCategoryCollection } from '../../../redux/shop/shopDataSelector';
 
 const CategoryCollectionPage =({collection})=>{
+ 
     const {title,items} =collection;
     return(
         <CollectionPageContainer>
@@ -22,5 +23,6 @@ const CategoryCollectionPage =({collection})=>{
 )}
 const mapStateToProps =(state,ownProps)=>({
     collection:selectCategoryCollection(ownProps.match.params.collectionId)(state)
+
 })
 export default connect(mapStateToProps)(CategoryCollectionPage);
