@@ -8,9 +8,9 @@ export const addCartItem =(item)=>({
     payload:item
 })
 
-export const removeCartItem =(id)=>({
+export const removeCartItem =(item)=>({
     type:CartActionTypes.REMOVE_ITEM,
-    payload:id
+    payload:item
 })
 
 export const descreaseQuantity =(item)=>({
@@ -20,4 +20,11 @@ export const descreaseQuantity =(item)=>({
 
 export const clearCart=()=>({
     type:CartActionTypes.CLEAR_CART
+})
+export const updateCartInFirebase =()=>({
+    type:CartActionTypes.UPDATE_CART_IN_FIREBASE
+})
+export const setCartFromfirebase = cartItems =>({
+    type:CartActionTypes.SET_CART_FROM_FIREBASE,
+    payload:cartItems
 })

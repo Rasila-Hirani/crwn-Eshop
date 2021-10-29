@@ -33,7 +33,7 @@ const CheckoutItem =({cartItem,clearItem,addItem,descreaseQuantity})=>{
   </CheckoutItemContainer>
 )};
 const mapDispatchToProps =(dispatch)=>({
-    clearItem:id=>dispatch(removeCartItem()),
+    clearItem:item=>dispatch(removeCartItem(item)),
     addItem :item =>dispatch(addCartItem(item)),
     descreaseQuantity: item => dispatch(descreaseQuantity(item))
 })

@@ -1,7 +1,8 @@
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc,getDocs, getDoc,setDoc ,collection, writeBatch} from 'firebase/firestore';
+import { getFirestore,doc,getDocs, getDoc,setDoc ,collection, writeBatch,query,where} from 'firebase/firestore';
 import {getAuth ,GoogleAuthProvider,signInWithPopup,createUserWithEmailAndPassword,signInWithEmailAndPassword} from 'firebase/auth';
+
 
 const config ={
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -39,7 +40,20 @@ const config ={
     
     return userSnap;
   }
-
+export const getUserCartRef = async userId =>{
+  const cartCollection =collection(db,'carts');
+  const q = query(cartCollection,where('userId','==',userId))
+  const querySnapshot = await getDocs(q);
+ 
+  if(querySnapshot.empty){
+    const cartDocRef=doc(cartCollection);
+      await setDoc(cartDocRef,{ userId, cartItems: []})
+      return cartDocRef;
+    }else{
+     return querySnapshot.docs[0].ref;
+  }
+  
+}
  export const signUpwithEmailAndPassword =(email,password)=>{
  
     return createUserWithEmailAndPassword(auth,email,password)
@@ -79,11 +93,7 @@ return transformCollection.reduce((accumulator,collection) =>{
       accumulator[collection.title.toLowerCase()] =collection;
       return accumulator;
     },{})
-   
  })
-
-
-
 }
 
 export const getCurrentUser =() =>{
